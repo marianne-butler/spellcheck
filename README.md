@@ -5,8 +5,8 @@ I used vanilla javascript to try to keep it simple and it’s compiled using `pa
 To run and view the app
 In the base directory, run:
 
-> npm install
-> npm start
+- npm install
+- npm start
 
 then navigate to: 
 > http://localhost:1234/
