@@ -17,6 +17,7 @@ Notes on implementation
 2) I tried to implement spell check only on the “current word” (the word where the cursor is), because it felt like a lot to spell check the whole document on each update. This lead to 2 issues which I didn’t have time to resolve.
 
    a) When you switch language, the state of existing nodes (with or without error marking) is not updated.
+
    b) Sometimes when editing words which are not at the end of paragraphs, part of the error marking is not updated. 
 
 
