@@ -1,0 +1,209 @@
+$light: #f4f4f2;
+$dark: #1d1e20;
+$error: #eb5b55;
+
+@font-face {
+  font-family: Roslinda; 
+  src: url('./assets/RoslindaleDisplayNarrow-Light.woff2');
+}
+
+@font-face {
+  font-family: Manrope; 
+  src: url('./assets/Manrope-Regular.woff2');
+}
+
+html, body {
+	background: $dark;
+	color: $light;
+	font-family: Manrope;
+	font-weight: normal;
+	font-size: 100%;
+	line-height: 1.4;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.wrapper {
+	margin-top: 2rem;
+	width: 80%;
+	max-width: 50rem;
+	display: grid;
+	grid-template-columns: 1fr 30%;
+	grid-row-gap: 2rem;
+	
+	.intro {
+		margin: 0;
+		grid-column-start: 1;
+		grid-row-start: 2;
+	}
+
+	.illustration {
+		grid-row-start: 2;
+		grid-column-start: 2;
+		grid-row-end: span 2;
+		align-self: flex-end;
+		transform: translateY(3rem);
+		fill: $light;
+
+		.illustration__rays {
+			opacity: 0;
+		}
+
+		.illustration__leaf {
+			fill-opacity: 0.5;
+		}	
+	}
+
+	h1 {
+		font-family: Roslinda;
+		font-weight: 300;
+		font-size: 2.2rem;
+		margin: 0;
+		grid-column-start: 1;
+		grid-column-end: span 2;
+		grid-row-start: 1;
+	}
+
+	.languages {
+		grid-column-start: 1;
+		grid-column-end: span 2;
+		grid-row-start: 1;
+		margin-top: 4rem;
+		pointer-events: none;
+		opacity: 0.5;
+	}
+
+	.toggle {
+		grid-column-start: 1;
+		grid-row-start: 3;
+		align-self: flex-end;
+		margin-bottom: 1rem;
+		position: relative;
+		pointer-events: none;
+		opacity: 0;
+
+		span {
+			cursor: pointer;
+			user-select: none;
+		}
+
+		input {
+			cursor: pointer;
+		}
+	}
+
+	.editor {
+		grid-column-start: 1;
+		grid-column-end: span 2;
+		grid-row-start: 4;
+		position: relative;
+		pointer-events: none;
+
+		.tiptap {
+			opacity: 0.5;
+			background: $light;
+			color: $dark;
+			border-radius: 5px;
+			padding: 1rem 2rem;
+			margin-top: 1rem;
+		}
+
+		&:before {
+			position: absolute;
+			top: -1.7rem;
+			left: 0;
+			content: "Dictionaries loading...";
+		}
+	}
+
+	select {
+		position: fixed;
+
+		option {
+			padding: 0.5rem;
+		}
+	}
+
+	&[data-dictionaries=ready] {
+		.toggle {
+			pointer-events: all;
+			opacity: 1;
+		}
+
+		.languages {
+			pointer-events: all;
+			opacity: 1;
+		}
+
+		.editor {
+			pointer-events: all;
+
+			&:before {
+				display: none;
+			}
+
+			.tiptap {
+				opacity: 1;
+
+				p.is-editor-empty:first-child::before {
+				  color: #adb5bd;
+				  content: attr(data-placeholder);
+				  float: left;
+				  height: 0;
+				  pointer-events: none;
+				}
+
+				&.ProseMirror-focused {
+					&:before {
+						position: absolute;
+						top: -3.5rem;
+						font-size: 80%;
+						line-height: 1.4;
+						left: 0;
+						right: 20%;
+						content: "(hint: use keyboard shortcurt Shift+Mod+L)";
+						color: $light;
+					}
+				}
+			}
+		}
+	}
+
+	&.wrapper--spellcheck {
+		.illustration {
+			.illustration__rays {
+				fill: yellow;
+				opacity: 1;
+			}
+
+			.illustration__leaf {
+				fill: #56c87c;
+				fill-opacity: 1;
+			}
+		}
+
+		.editor .tiptap .error {
+			text-decoration: underline wavy $error;
+	  	text-decoration-skip-ink: none;
+		}
+	}
+
+	@media (min-width: 600px) {
+		margin-top: 10vh;
+		grid-template-columns: 1fr 200px;
+
+		h1 {
+			font-size: 3rem;
+		}
+	}
+
+	@media (min-width: 900px) {
+		grid-template-columns: 2fr 1fr;
+	}
+}
