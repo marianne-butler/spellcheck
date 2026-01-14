@@ -21,4 +21,4 @@ Notes on implementation
 
    b) Sometimes when editing words which are not at the end of paragraphs, part of the error marking is not updated. 
 
-
+3) The underline is not working in Safari, I didn't have time to address this.
